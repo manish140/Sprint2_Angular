@@ -1,0 +1,87 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<h3>Add Student</h3>  
+<div class="row">  
+  <div class="col-sm-4"></div>  
+  <div class="col-sm-4" >  
+    <div [hidden]="submitted" style="width: 400px;">  
+      <form [formGroup]="flightSaveForm" #saveFlight (ngSubmit)="saveFlight(saveFlight)">  
+
+        
+        <div class="form-group">  
+            <label for="name">Flight Number</label>  
+            <input type="number" class="form-control"  formControlName="flight_number" data-toggle="tooltip"   
+               data-placement="right" title="Enter Flight Number" >  
+            <div class="alert alert-danger" *ngIf = "(FlightNumber.touched) && (FlightNumber.invalid)"   
+              style="margin-top: 5px;">  
+                <span *ngIf="FlightNumber.errors.required">Flight Number is required</span>  
+                  <span *ngIf = "FlightNumber.errors.min">   
+                      min Error   
+                  </span>                     
+              </div>  
+        </div>  
+
+
+          <div class="form-group">  
+              <label for="name">Flight Model</label>  
+              <input type="text" class="form-control"  formControlName="flight_model" data-toggle="tooltip"   
+                 data-placement="right" title="Enter Flight Model" >  
+              <div class="alert alert-danger" *ngIf = "(FlightModel.touched) && (FlightModel.invalid)"   
+                style="margin-top: 5px;">  
+                  <span *ngIf="FlightModel.errors.required">Flight Model is required</span>  
+                    <span *ngIf = "FlightModel.errors.minlength">   
+                        MinLength Error   
+                    </span>                     
+                </div>  
+          </div>  
+    
+          <div class="form-group">  
+              <label for="name">Carrier Name</label>  
+              <input type="text" class="form-control" formControlName="carrier_name"   
+                data-toggle="tooltip" data-placement="right" title="Enter carrier name">  
+                <div class="alert alert-danger" *ngIf = "(CarrierName.touched) && (CarrierName.invalid)"   
+                style="margin-top: 5px;">  
+                  <span *ngIf="CarrierName.errors.required">CarrierName  is required</span>
+                    <span *ngIf = "CarrierName.errors.minlength">   
+                        MinLength Error
+                    </span>    
+                    <span *ngIf = "CarrierName.errors.maxlength">   
+                        MaxLength Error
+                    </span>                     
+                </div>  
+          </div>  
+    
+          <div class="form-group">  
+            <label for="name">Seat Capacity</label>  
+            <input type="number" class="form-control" formControlName="seat_capacity"   
+              data-toggle="tooltip" data-placement="right" title="Enter flight seat capacity">  
+              <div class="alert alert-danger" *ngIf = "(SeatCapacity.touched) && (SeatCapacity.invalid)"   
+              style="margin-top: 5px;">  
+                <span *ngIf="SeatCapacity.errors.required">Seat Capacity must not be null</span>
+                  <span *ngIf = "SeatCapacity.errors.min">   
+                      Min Error
+                  </span>
+                  <span *ngIf = "SeatCapacity.errors.max">   
+                    Max Error:Seat capacity must be between 2-1000
+                </span>                         
+              </div>  
+        </div>  
+          <button type="submit" class="btn btn-success"(click)="save()">Submit</button>  
+      </form>  
+  </div>  
+  </div>  
+  <div class="col-sm-4"></div>  
+</div>  
+<div class="row">  
+  <div class="col-sm-4"></div>  
+  <div class="col-sm-4">  
+      <div [hidden]="!submitted">  
+         <h4>Student Added SuccessFully!</h4>  
+         <button (click)="addFlightForm()" class='btn btn-primary'>Add More Flights</button>
+      </div>        
+  </div>  
+  <div class="col-sm-4"></div>  
+</div>  
+
