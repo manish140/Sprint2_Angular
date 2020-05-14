@@ -1,3 +1,7 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
 <div class="panel panel-default">  
     <div class="panel-heading">  
         <h1 style="text-align: center">Flights</h1><br>  
@@ -27,66 +31,65 @@
             </thead>  
             <tbody>  
                  <tr *ngFor="let flight of flights ">  
-                    <td>{{flight.flight_number}}</td>  
-                    <td>{{flight.flight_model}}</td>  
-                    <td>{{flight.carrier_name}}</td>
-                    <td>{{flight.seat_capacity}}</td>  
-                    <td><button (click)="deleteFlight(flight.flight_number)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>   
-                      <button (click)="updateFlight(flight.flight_number)" class='btn btn-info'  
-                      data-toggle="modal" data-target="#myModal">Update</button>  
-                    </td>  
+                    <td>{{flight.flightNumber}}</td>  
+                    <td>{{flight.flightModel}}</td>  
+                    <td>{{flight.carrierName}}</td>
+                    <td>{{flight.seatCapacity}}</td>  
+                    <td><button (click)="deleteFlight(flight.flightNumber)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>
+                        <button (click)="updateFlight(flight.flightNumber)" class='btn btn-info'  
+                        data-toggle="modal" data-target="#myModal">Update</button>  </td>
                   </tr>   
             </tbody><br>  
         </table>  
-    </div>  
-  </div>
+    </div>
+</div>   
   <div class="modal" id="myModal">  
-    <div class="modal-dialog">  
-      <div class="modal-content">  
-            <form [formGroup]="flightupdateform" #updflights (ngSubmit)="updateFlight(updflights)">  
-        <!-- Modal Header -->  
-        <div class="modal-header">  
-          <h4 class="modal-title" style="text-align: center">Update Flight</h4>  
-            
+        <div class="modal-dialog">  
+          <div class="modal-content">  
+                <form [formGroup]="flightupdateform" #updflight (ngSubmit)="updateFlights(updflight)">  
+            <!-- Modal Header -->  
+           <div class="modal-header">  
+              <h4 class="modal-title" style="text-align: center">Update Flight</h4>  
+                
+            </div> 
+              
+            <!-- Modal body -->  
+           <div class="modal-body" *ngFor="let flight of flightlist " >  
+                <div [hidden]="isupdated">  
+  
+                    <input type="hidden" class="form-control"  formControlName="flightNumber" [(ngModel)]="flight.flightNumber">  
+                            <div class="form-group">  
+                                <label for="flightNumber">Flight Number</label>  
+                                <input type="number" class="form-control"readonly=true formControlName="flightNumber" [(ngModel)]="flight.flightNumber"  >  
+                            </div>  
+                      
+                            <div class="form-group">  
+                                <label for="flightModel">Flight Model</label>  
+                                <input type="text" class="form-control" formControlName="flightModel" [(ngModel)]="flight.flightModel">  
+                            </div>  
+                      
+                            <div class="form-group">  
+                                <label for="carrierName">Carrier Name</label>  
+                                <input type="text" class="form-control" formControlName="carrierName" [(ngModel)]="flight.carrierName">  
+                            </div> 
+                            <div class="form-group">  
+                                <label for="seatCapacity">seatCapacity</label>  
+                                <input type="number" class="form-control"  formControlName="seatCapacity" [(ngModel)]="flight.seatCapacity"  >  
+                            </div>               
+                  </div>    
+                 <div [hidden]="!isupdated">  
+                      <h4>Flight Detail Updated!</h4>  
+                  </div>      
+                      
+            </div>  
+              
+            <!-- Modal footer -->  
+          <div class="modal-footer" >  
+              <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>  
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>  
+            </div>  
+        
+        </form>  
+          </div>  
         </div>  
-          
-        <!-- Modal body -->  
-        <div class="modal-body" *ngFor="let flight of flightlist " >  
-            <div [hidden]="isupdated">  
-
-                <input type="hidden" class="form-control"  formControlName="flight_number" [(ngModel)]="flight.flight_number">  
-                        <div class="form-group">  
-                            <label for="name">Flight Number</label>  
-                            <input type="number" class="form-control"  formControlName="flight_number" [(ngModel)]="flight.flight_number"  >  
-                        </div>  
-                  
-                        <div class="form-group">  
-                            <label for="name">Flight Model</label>  
-                            <input type="text" class="form-control" formControlName="flight_model" [(ngModel)]="flight.flight_model">  
-                        </div>  
-                  
-                        <div class="form-group">  
-                            <label for="name">Carrier Name</label>  
-                            <input type="text" class="form-control" formControlName="carrier_name" [(ngModel)]="flight.carrier_name">                              
-                        </div>
-                        <div class="form-group">  
-                            <label for="name">Seat Capacity</label>  
-                            <input type="text" class="form-control" formControlName="seat-capacity" [(ngModel)]="flight.seat_capacity">                              
-                        </div>                           
-              </div>    
-              <div [hidden]="!isupdated">  
-                  <h4>flight Details Updated!</h4>  
-              </div>          
-                  
-        </div>  
-          
-        <!-- Modal footer -->  
-        <div class="modal-footer" >  
-          <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>  
-          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>  
-        </div>  
-          
-    </form>  
       </div>  
-    </div>  
-  </div>  

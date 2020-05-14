@@ -18,17 +18,17 @@ export class AddFlightComponent implements OnInit {
   }
 
   flightSaveForm=new FormGroup({
-    flight_number:new FormControl('',[Validators.required,Validators.min(1000)]),
-    flight_model:new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(10)]),
-    carrier_name:new FormControl('',[Validators.required,Validators.minLength(6),Validators.maxLength(15)]),
-    seat_capacity:new FormControl('',[Validators.required,Validators.min(2),Validators.max(850)])
+    flightNumber:new FormControl('',[Validators.required,Validators.min(1000)]),
+    flightModel:new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(10)]),
+    carrierName:new FormControl('',[Validators.required,Validators.minLength(6),Validators.maxLength(15)]),
+    seatCapacity:new FormControl('',[Validators.required,Validators.min(2),Validators.max(850)])
   });
   saveFlight(saveFlight){  
     this.flight=new Flight();    
-    this.flight.flight_number=this.FlightNumber.value; 
-    this.flight.flight_model=this.FlightModel.value;  
-    this.flight.carrier_name=this.CarrierName.value;  
-    this.flight.seat_capacity=this.SeatCapacity.value;  
+    this.flight.flightNumber=this.FlightNumber.value; 
+    this.flight.flightModel=this.FlightModel.value;  
+    this.flight.carrierName=this.CarrierName.value;  
+    this.flight.seatCapacity=this.SeatCapacity.value;  
     this.submitted = true;  
     this.save();  
   }  
@@ -38,21 +38,21 @@ export class AddFlightComponent implements OnInit {
 this.flight = new Flight();  
 } 
 get FlightNumber(){  
-  return this.flightSaveForm.get('flight_number');  
+  return this.flightSaveForm.get('flightNumber');  
 }  
 get FlightModel(){  
-  return this.flightSaveForm.get('flight_model');  
+  return this.flightSaveForm.get('flightModel');  
 }  
 
 get CarrierName(){  
-  return this.flightSaveForm.get('carrier_name');  
+  return this.flightSaveForm.get('carrierName');  
 }  
 
 get SeatCapacity(){  
-  return this.flightSaveForm.get('seat_capacity');  
+  return this.flightSaveForm.get('seatCapacity');  
 } 
 addFlightForm(){  
-  this.submitted=false;  
+  this.submitted=true;
   this.flightSaveForm.reset();  
 }   
 }

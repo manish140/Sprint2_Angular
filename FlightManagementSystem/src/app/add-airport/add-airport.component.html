@@ -1,0 +1,70 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<h3>Add Airport</h3>  
+<div class="row">  
+  <div class="col-sm-4"></div>  
+  <div class="col-sm-4" >  
+    <div [hidden]="submitted" style="width: 400px;">  
+      <form [formGroup]="airportSaveForm" #saveairport (ngSubmit)="saveAirport(saveAirport)">  
+
+        
+        <div class="form-group">  
+            <label for="airportName">Airport Name</label>  
+            <input type="text" class="form-control"  formControlName="airportName" data-toggle="tooltip"   
+               data-placement="right" title="Enter Airport Name" >  
+            <div class="alert alert-danger" *ngIf = "(AirportName.touched) && (AirportName.invalid)"   
+              style="margin-top: 5px;">  
+                <span *ngIf="AirportName.errors.required">Airport Name is required</span>  
+                  <span *ngIf = "AirportName.errors.minlength">   
+                      MinLength Error   
+                  </span>                     
+              </div>  
+        </div>  
+
+
+          <div class="form-group">  
+              <label for="airportCode">Airport Code</label>  
+              <input type="text" class="form-control"  formControlName="airportCode" data-toggle="tooltip"   
+                 data-placement="right" title="Enter Airport Code" >  
+              <div class="alert alert-danger" *ngIf = "(AirportCode.touched) && (AirportCode.invalid)"   
+                style="margin-top: 5px;">  
+                  <span *ngIf="AirportCode.errors.required">Airport Code is required</span>  
+                    <span *ngIf = "AirportCode.errors.minlength">   
+                        MinLength Error   
+                    </span>                     
+                </div>  
+          </div>  
+    
+          <div class="form-group">  
+              <label for="airportLocation">Airport Location</label>  
+              <input type="text" class="form-control" formControlName="airportLocation"   
+                data-toggle="tooltip" data-placement="right" title="Enter Airport Location">  
+                <div class="alert alert-danger" *ngIf = "(AirportLocation.touched) && (AirportLocation.invalid)"   
+                style="margin-top: 5px;">  
+                  <span *ngIf="AirportLocation.errors.required">Airport Location  is required</span>
+                    <span *ngIf = "AirportLocation.errors.minlength">   
+                        MinLength Error
+                    </span>    
+                    <span *ngIf = "AirportLocation.errors.maxlength">   
+                        MaxLength Error
+                    </span>                     
+                </div>  
+          </div>    
+          <button type="submit" class="btn btn-success" >Submit</button>  
+      </form>  
+      </div>
+  </div>    
+  <div class="col-sm-4"></div>  
+</div>  
+<div class="row">  
+  <div class="col-sm-4"></div>  
+  <div class="col-sm-4">  
+      <div [hidden]="!submitted">  
+         <h4>Airport Added SuccessFully!</h4>  
+         <button (click)="addAirportForm()" class='btn btn-primary'>Add More Airports</button>
+      </div>        
+  </div>  
+  <div class="col-sm-4"></div>  
+</div>  

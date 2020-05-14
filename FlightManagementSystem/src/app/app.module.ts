@@ -7,14 +7,20 @@ import { AddFlightComponent } from './add-flight/add-flight.component';
 import { ViewFlightComponent } from './view-flight/view-flight.component';
 import { HttpClientModule } from '@angular/common/http';  
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {DataTablesModule} from 'angular-datatables';  
+import {DataTablesModule} from 'angular-datatables';
+import { AddAirportComponent } from './add-airport/add-airport.component';
+import { ViewAirportComponent } from './view-airport/view-airport.component';
+import { SearchFlightComponent } from './search-flight/search-flight.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AddFlightComponent,
-    ViewFlightComponent
+    ViewFlightComponent,
+    AddAirportComponent,
+    ViewAirportComponent,
+    SearchFlightComponent,
   ],
   imports: [
     BrowserModule,
