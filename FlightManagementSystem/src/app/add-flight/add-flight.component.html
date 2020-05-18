@@ -17,23 +17,21 @@
             <div class="alert alert-danger" *ngIf = "(FlightNumber.touched) && (FlightNumber.invalid)"   
               style="margin-top: 5px;">  
                 <span *ngIf="FlightNumber.errors.required">Flight Number is required</span>  
-                  <span *ngIf = "FlightNumber.errors.min">   
-                      min Error   
-                  </span>                     
+                  <span *ngIf = "FlightNumber.errors.min">flight number should be more than 40000</span>
               </div>  
         </div>  
 
 
           <div class="form-group">  
               <label for="flightModel">Flight Model</label>  
-              <input type="text" class="form-control"  formControlName="flightModel" data-toggle="tooltip"   
+              <input type="text" class="form-control"formControlName="flightModel" data-toggle="tooltip"   
                  data-placement="right" title="Enter Flight Model" >  
               <div class="alert alert-danger" *ngIf = "(FlightModel.touched) && (FlightModel.invalid)"   
                 style="margin-top: 5px;">  
                   <span *ngIf="FlightModel.errors.required">Flight Model is required</span>  
-                    <span *ngIf = "FlightModel.errors.minlength">   
-                        MinLength Error   
-                    </span>                     
+                  <span *ngIf = "FlightModel.errors.minlength">MinLength 4 characters</span>
+                  <span *ngIf="FlightModel.errors.maxlength">Max length 10 characters</span>
+                  <span *ngIf="FlightModel.errors.pattern">No special characters allowed</span>
                 </div>  
           </div>  
     
@@ -44,13 +42,10 @@
                 <div class="alert alert-danger" *ngIf = "(CarrierName.touched) && (CarrierName.invalid)"   
                 style="margin-top: 5px;">  
                   <span *ngIf="CarrierName.errors.required">CarrierName  is required</span>
-                    <span *ngIf = "CarrierName.errors.minlength">   
-                        MinLength Error
-                    </span>    
-                    <span *ngIf = "CarrierName.errors.maxlength">   
-                        MaxLength Error
-                    </span>                     
-                </div>  
+                    <span *ngIf = "CarrierName.errors.minlength"> MinLength Error </span>    
+                    <span *ngIf = "CarrierName.errors.maxlength">MaxLength Error</span>                     
+                    <span *ngIf="CarrierName.errors.pattern">No special character and number is allowed</span>
+                  </div>  
           </div>  
     
           <div class="form-group">  
@@ -60,15 +55,12 @@
               <div class="alert alert-danger" *ngIf = "(SeatCapacity.touched) && (SeatCapacity.invalid)"   
               style="margin-top: 5px;">  
                 <span *ngIf="SeatCapacity.errors.required">Seat Capacity must not be null</span>
-                  <span *ngIf = "SeatCapacity.errors.min">   
-                      Min Error
-                  </span>
-                  <span *ngIf = "SeatCapacity.errors.max">   
-                    Max Error:Seat capacity must be between 2-1000
-                </span>                         
+                <span *ngIf = "SeatCapacity.errors.min">seat capacity must be between 2-1000</span>
+                <span *ngIf = "SeatCapacity.errors.max">Max Error:Seat capacity must be between 2-1000</span>                         
+                <span *ngIf="SeatCapacity.errors.pattern">Only number is allowed</span>
               </div>  
         </div>  
-          <button type="submit" class="btn btn-success" >Submit</button>  
+          <button [disabled]="!flightSaveForm.valid" type="submit" class="btn btn-success" >Submit</button>  
       </form>  
   </div>  
   </div>  
@@ -79,7 +71,7 @@
   <div class="col-sm-4">  
       <div [hidden]="!submitted">  
          <h4>Flight Added SuccessFully!</h4>  
-         <button routerLink="add-airport"  class='btn btn-primary'>Add More Flights</button>
+         <button routerLink="/view-flight"  class='btn btn-primary'>Add More Flights</button>
       </div>        
   </div>  
   <div class="col-sm-4"></div>  

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FlightService } from '../flight.service';
-import { Flight } from '../flight';
+import { FlightService, Flight } from '../service/flight.service'
 import {FormControl,FormGroup,Validators} from '@angular/forms';  
 @Component({
   selector: 'app-add-flight',
@@ -18,10 +17,10 @@ export class AddFlightComponent implements OnInit {
   }
 
   flightSaveForm=new FormGroup({
-    flightNumber:new FormControl('',[Validators.required,Validators.min(1000)]),
-    flightModel:new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(10)]),
-    carrierName:new FormControl('',[Validators.required,Validators.minLength(6),Validators.maxLength(15)]),
-    seatCapacity:new FormControl('',[Validators.required,Validators.min(2),Validators.max(850)])
+    flightNumber:new FormControl('',[Validators.required,Validators.min(40000)]),
+    flightModel:new FormControl('',[Validators.required,Validators.minLength(4),Validators.maxLength(10),Validators.pattern("^[a-zA-Z0-9]{4,10}$")]),
+    carrierName:new FormControl('',[Validators.required,Validators.minLength(6),Validators.maxLength(15),Validators.pattern("^[A-Za-z ]{6,15}$")]),
+    seatCapacity:new FormControl('',[Validators.required,Validators.min(2)])
   });
   saveFlight(saveFlight){  
     this.flight=new Flight();    

@@ -2,21 +2,29 @@ import { Injectable,Pipe } from '@angular/core';
 import { HttpClient,HttpClientModule,HttpHeaders} from '@angular/common/http';
 import { retry,catchError} from 'rxjs/operators';  
 import { Observable,pipe,throwError} from 'rxjs';
-import { Flight } from './flight';
+import { User } from '../user';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
     'Authorization': 'my-auth-token'
   })
 };
+export class Flight {
+
+  flightNumber:number;
+  flightModel:String;
+  carrierName:String;
+  seatCapacity:number;
+  
+}
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class FlightService {
-  private baseUrl = 'http://localhost:4568/flights';
-  private baseUrl1="http://localhost:4567/airport";
+  private baseUrl = 'http://localhost:4567/flights';
+  private baseUrl2="http://localhost:4569/users";
   constructor(private http:HttpClient) { }
   getFlightList():Observable<any>{
     return this.http.get(`${this.baseUrl}`+'/allFlights');  
@@ -35,34 +43,29 @@ export class FlightService {
     const url=`${this.baseUrl}/${flightNumber}`;
     return this.http.get<Flight>(url,httpOptions).pipe(
     catchError(this.handleError));
-   //return this.http.get(`${this.baseUrl}/${flightNumber}`);
   }  
- /* updateFlight(flightNumber: number, value: any): Observable<Object> {  
-    return this.http.post(`${this.baseUrl}/modify/${flightNumber}`, value);  
-  }*/
   updateFlight(flight:Flight) : any
   {
-      return this.http.put('http://localhost:4568/flights/modify',flight);
+      return this.http.put('http://localhost:4567/flights/modify',flight);
   }
    
 
-  addAirport(airport: object): Observable<object> {  
-    return this.http.post('http://localhost:4567/airport/addAirport',airport);  
+  addUser(user: object): Observable<object> {  
+    return this.http.post(`${this.baseUrl2}`+'/addUser', user);  
   }
-  getAirportList(): Observable<any> {  
-    return this.http.get('http://localhost:4567/airport/allAirports');  
-  } 
-  getAirport(airportCode: String): Observable<Object> {  
-    return this.http.get('http://localhost:4567/airport/airport/{airportCode}');  
-  } 
-  
-  deleteAirport(airportCode: String): Observable<any> { 
-    const url = `${this.baseUrl1}/${airportCode}`; 
+  getUserList():Observable<any>{
+    return this.http.get(`${this.baseUrl2}`+'/allUsers');  
+  }
+  deleteUser(userId: number): Observable<{}> {  
+    const url = `${this.baseUrl2}/${userId}`;
     return this.http.delete(url,httpOptions).pipe(
       catchError(this.handleError)
-    ); 
-  }   
- 
+    );
+  }  
+  loginUser(user:User):Observable<any>{
+    return this.http.post<any>(`${this.baseUrl2}`+'/login', user);
+  }
+
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

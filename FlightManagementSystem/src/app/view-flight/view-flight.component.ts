@@ -1,11 +1,8 @@
 import { Component, OnInit, Inject} from '@angular/core';
-import { FlightService } from '../flight.service';
-import { Flight } from '../flight';  
+import { FlightService, Flight } from '../service/flight.service'
 import {Router} from "@angular/router";
 import { Observable,Subject } from "rxjs";  
-import {FormControl,FormGroup,Validators} from '@angular/forms';  
-import {DataTablesModule} from 'angular-datatables';  
-
+import {FormControl,FormGroup,Validators} from '@angular/forms';
 @Component({
   selector: 'app-view-flight',
   templateUrl: './view-flight.component.html',
@@ -18,7 +15,7 @@ export class ViewFlightComponent implements OnInit {
   FlightsArray:any[]=[];
   dtOptions:DataTables.Settings={};
   dtTrigger: Subject<any>= new Subject();  
-  flights: Observable<Flight[]>;  
+  flights: Observable<Flight[]>;
   flight : Flight=new Flight();  
   deleteMessage=false;  
   flightlist:any=[];
@@ -38,18 +35,15 @@ export class ViewFlightComponent implements OnInit {
 }
 
 deleteFlight(flightNumber: number) {  
-  this.flightService.deleteFlight(flightNumber).subscribe(data => {  
-    /*console.log(data);  
-    this.deleteMessage=true;  
-    this.flightService.getFlightList().subscribe(data =>{  
-      this.flights =data  
-      })
-    });*/
+  this.flightService.deleteFlight(flightNumber).subscribe(
+    data => {  
+      this.deleteMessage=true;
     response => {
       console.log(response);
       this.flightlist = response;
     }
-  });
+  },
+  error=>console.log(error));
   }
   updateFlight(flightNumber: number){  
     this.flightService.getFlight(flightNumber)  
@@ -63,19 +57,19 @@ deleteFlight(flightNumber: number) {
         error => console.log(error));  
   }
   flightupdateform=new FormGroup({  
-    flightNumber:new FormControl(),  
-    flightModel:new FormControl(),  
-    carrierName:new FormControl(),  
-    seatCapacity:new FormControl()  
+    flightNumber:new FormControl('',[Validators.required,Validators.min(40000)]),  
+    flightModel:new FormControl('',[Validators.required,Validators.minLength(4),Validators.maxLength(10),Validators.pattern("^[a-zA-Z0-9]{4,10}$")]),  
+    carrierName:new FormControl('',[Validators.required,Validators.minLength(6),Validators.maxLength(15),Validators.pattern("^[a-zA-Z ]{6,15}$")]),
+    seatCapacity:new FormControl('',[Validators.required,Validators.min(2)])
   });  
 
   updateFlights(updflight){  
    this.flight=new Flight();   
-   this.flight.flightNumber=this.flightNumber.value;  
-   this.flight.flightModel=this.flightModel.value;  
-   this.flight.carrierName=this.carrierName.value;  
-   this.flight.seatCapacity=this.seatCapacity.value;  
-   console.log(this.seatCapacity.value);  
+   this.flight.flightNumber=this.FlightNumber.value;  
+   this.flight.flightModel=this.FlightModel.value;  
+   this.flight.carrierName=this.CarrierName.value;  
+   this.flight.seatCapacity=this.SeatCapacity.value;  
+   console.log(this.SeatCapacity.value);  
      
   
    this.flightService.updateFlight(this.flight).subscribe(  
@@ -88,19 +82,19 @@ deleteFlight(flightNumber: number) {
     error => console.log(error)); 
 
   }  
-  get flightNumber(){  
+  get FlightNumber(){  
     return this.flightupdateform.get('flightNumber');  
   }  
   
-  get flightModel(){  
+  get FlightModel(){  
     return this.flightupdateform.get('flightModel');  
   }  
   
-  get carrierName(){  
+  get CarrierName(){  
     return this.flightupdateform.get('carrierName');  
   }  
   
-  get seatCapacity(){  
+  get SeatCapacity(){  
     return this.flightupdateform.get('seatCapacity');  
   }
   changeisUpdate(){  

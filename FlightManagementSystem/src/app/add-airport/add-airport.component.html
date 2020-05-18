@@ -17,9 +17,9 @@
             <div class="alert alert-danger" *ngIf = "(AirportName.touched) && (AirportName.invalid)"   
               style="margin-top: 5px;">  
                 <span *ngIf="AirportName.errors.required">Airport Name is required</span>  
-                  <span *ngIf = "AirportName.errors.minlength">   
-                      MinLength Error   
-                  </span>                     
+                  <span *ngIf = "AirportName.errors.minlength">MinLength Error</span>
+                  <span *ngIf="AirportName.errors.maxlength">MaxLength error</span>
+                  <span *ngIf="AirportName.errors.pattern">No special character and number is allowed</span>                     
               </div>  
         </div>  
 
@@ -31,9 +31,9 @@
               <div class="alert alert-danger" *ngIf = "(AirportCode.touched) && (AirportCode.invalid)"   
                 style="margin-top: 5px;">  
                   <span *ngIf="AirportCode.errors.required">Airport Code is required</span>  
-                    <span *ngIf = "AirportCode.errors.minlength">   
-                        MinLength Error   
-                    </span>                     
+                    <span *ngIf = "AirportCode.errors.minlength"> Airport code should be minimum 3 characters </span> 
+                    <span *ngIf="AirportCode.errors.maxlength">Airport code should be 3 characters only</span>
+                    <span *ngIf="AirportCode.errors.pattern">No special character and number is allowed</span>                    
                 </div>  
           </div>  
     
@@ -44,13 +44,10 @@
                 <div class="alert alert-danger" *ngIf = "(AirportLocation.touched) && (AirportLocation.invalid)"   
                 style="margin-top: 5px;">  
                   <span *ngIf="AirportLocation.errors.required">Airport Location  is required</span>
-                    <span *ngIf = "AirportLocation.errors.minlength">   
-                        MinLength Error
-                    </span>    
-                    <span *ngIf = "AirportLocation.errors.maxlength">   
-                        MaxLength Error
-                    </span>                     
-                </div>  
+                    <span *ngIf = "AirportLocation.errors.minlength">MinLength Error</span>    
+                    <span *ngIf = "AirportLocation.errors.maxlength">MaxLength Error</span>                     
+                    <span *ngIf="AirportLocation.errors.pattern">No special character and number is allowed</span>
+                  </div>  
           </div>    
           <button type="submit" class="btn btn-success" >Submit</button>  
       </form>  

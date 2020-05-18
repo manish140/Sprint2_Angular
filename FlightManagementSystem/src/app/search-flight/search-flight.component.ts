@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Flight } from '../flight';
-import { FlightService } from '../flight.service';
+import { FlightService, Flight } from '../service/flight.service'
 import { Observable,Subject } from "rxjs";  
-import { FormGroup, FormControl } from '@angular/forms';  
+import { FormGroup, FormControl ,Validators} from '@angular/forms';  
 @Component({
   selector: 'app-search-flight',
   templateUrl: './search-flight.component.html',
@@ -14,13 +13,14 @@ export class SearchFlightComponent implements OnInit {
   private data;  
   isupdated = false; 
   flightlist:any=[];
+  msg='';
   constructor(private flightService:FlightService) { }
-
+ 
   ngOnInit(): void {
     
   }
     form=new FormGroup({  
-    flightNumber:new FormControl(),  
+    flightNumber:new FormControl('',[Validators.required,Validators.min(40000)]),  
     flightModel:new FormControl(),  
     carrierName:new FormControl(),  
     seatCapacity:new FormControl(), 
@@ -34,16 +34,13 @@ export class SearchFlightComponent implements OnInit {
           this.flightlist=[];
           this.flightlist.push(data)             
         },  
-        error => console.log(error));  
+        error =>{
+       this.msg="flight not found";
+       console.log(error)
+        });  
   }
   deleteFlight(flightNumber: number) {  
-    this.flightService.deleteFlight(flightNumber).subscribe(data => {  
-      /*console.log(data);  
-      this.deleteMessage=true;  
-      this.flightService.getFlightList().subscribe(data =>{  
-        this.flights =data  
-        })
-      });*/
+    this.flightService.deleteFlight(flightNumber).subscribe(data => {
       response => {
         console.log(response);
         this.flightlist = response;

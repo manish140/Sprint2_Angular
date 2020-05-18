@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FlightService } from '../flight.service';
-import { Airport } from '../airport';
+import { AirportService, Airport } from '../service/airport.service'
 import {FormControl,FormGroup,Validators} from '@angular/forms';  
 @Component({
   selector: 'app-add-airport',
@@ -9,7 +8,7 @@ import {FormControl,FormGroup,Validators} from '@angular/forms';
 })
 export class AddAirportComponent implements OnInit {
 
-  constructor(private flightservice:FlightService) { }
+  constructor(private flightservice:AirportService) { }
   airport: Airport=new Airport();
   submitted=false;
 
@@ -17,9 +16,9 @@ export class AddAirportComponent implements OnInit {
     this.submitted=false;
   }
   airportSaveForm=new FormGroup({
-    airportName:new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(10)]),
-    airportCode:new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(10)]),
-    airportLocation:new FormControl('',[Validators.required,Validators.minLength(6),Validators.maxLength(15)]),
+    airportName:new FormControl('',[Validators.required,Validators.minLength(6),Validators.maxLength(40),Validators.pattern("^[A-Za-z ]{6,40}$")]),
+    airportCode:new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(3),Validators.pattern("^[A-Za-z ]{3,3}$")]),
+    airportLocation:new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(30),Validators.pattern("^[A-Za-z ]{3,30}$")]),
   });
   saveAirport(saveAirport){  
     this.airport=new Airport();    

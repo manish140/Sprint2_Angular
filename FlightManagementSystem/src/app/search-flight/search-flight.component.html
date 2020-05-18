@@ -7,12 +7,18 @@
 <div class="row">  
     <div class="col-md-offset-4 col-md-4">   
         <form [formGroup]="form" #searchInfo (ngSubmit)="searchForm(flightNumber)">  
-            <table>  
-                <tr>
-                    <td> <input type="text" formControlName="flightNumber" placeholder="Enter Flight Number" class="form-control"> </td>
-                    <td><button class="btn btn-primary ">Search</button></td>
-                </tr>  
-            </table>  
+            <small class="danger">{{msg}}</small>
+            <div class="form-group">  
+                <label for="flightNumber">Flight Number</label>  
+                <input type="number" class="form-control"  formControlName="flightNumber" data-toggle="tooltip"   
+                   data-placement="right" title="Enter Flight Number" >  
+                <div class="alert alert-danger" *ngIf = "(flightNumber.touched) && (flightNumber.invalid)"   
+                  style="margin-top: 5px;">  
+                    <span *ngIf="flightNumber.errors.required">Flight Number is required</span>  
+                      <span *ngIf = "flightNumber.errors.min">flight number should be more than 40000</span>
+                  </div> 
+                  <button [disabled]="!form.valid" class="btn btn-primary ">Search</button>
+            </div> 
         </form>  
     </div>  
 </div>  

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FlightService } from '../flight.service';
-import { Airport } from '../airport'; 
+import { AirportService, Airport } from '../service/airport.service'
 import { Observable,Subject } from "rxjs";
 @Component({
   selector: 'app-view-airport',
@@ -10,7 +9,7 @@ import { Observable,Subject } from "rxjs";
 export class ViewAirportComponent implements OnInit {
 
   
-  constructor(private flightService:FlightService) { }
+  constructor(private airportService:AirportService) { }
   FlightsArray:any[]=[];
   dtOptions:DataTables.Settings={};
   dtTrigger: Subject<any>= new Subject();  
@@ -27,17 +26,17 @@ export class ViewAirportComponent implements OnInit {
       lengthMenu:[[6, 16, 20, -1], [6, 16, 20, "All"]],  
       processing: true  
   }
-  this.flightService.getAirportList().subscribe(data =>{  
+  this.airportService.getAirportList().subscribe(data =>{  
     this.airports =data;  
     this.dtTrigger.next();  
     })  
 }
  
  deleteAirport(airportCode: String) {  
-  this.flightService.deleteAirport(airportCode).subscribe(data => {  
+  this.airportService.deleteAirport(airportCode).subscribe(data => {  
     console.log(data);  
     this.deleteMessage=true;  
-    this.flightService.getAirportList().subscribe(data =>{  
+    this.airportService.getAirportList().subscribe(data =>{  
       this.airports =data  
       })
     });

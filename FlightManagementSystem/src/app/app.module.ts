@@ -11,6 +11,15 @@ import {DataTablesModule} from 'angular-datatables';
 import { AddAirportComponent } from './add-airport/add-airport.component';
 import { ViewAirportComponent } from './view-airport/view-airport.component';
 import { SearchFlightComponent } from './search-flight/search-flight.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { FlightHomeComponent } from './flight-home/flight-home.component';
+import { AirportHomeComponent } from './airport-home/airport-home.component';
+import { UsersHomeComponent } from './users-home/users-home.component';
+import { ViewUsersComponent } from './view-users/view-users.component';
+import { UserLoginComponent } from './user-login/user-login.component';
+import { LoginHomeComponent } from './login-home/login-home.component';
 
 
 @NgModule({
@@ -21,6 +30,15 @@ import { SearchFlightComponent } from './search-flight/search-flight.component';
     AddAirportComponent,
     ViewAirportComponent,
     SearchFlightComponent,
+    RegisterComponent,
+    LoginComponent,
+    HomeComponent,
+    FlightHomeComponent,
+    AirportHomeComponent,
+    UsersHomeComponent,
+    ViewUsersComponent,
+    UserLoginComponent,
+    LoginHomeComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,44 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
+<div class="panel panel-default">  
+    <div class="panel-heading">  
+        <h1 style="text-align: center">Users</h1><br>  
+        <div class="row" [hidden]="!deleteMessage">  
+               
+            <div class="col-sm-4"></div>  
+            <div class="col-sm-4">  
+                    <div class="alert alert-info alert-dismissible">  
+                            <button type="button" class="close" data-dismiss="alert">×</button>  
+                            <strong>User Data Deleted</strong>  
+                    </div>  
+            </div>  
+            <div class="col-sm-4"></div>  
+    </div>             
+</div>  
+      <div class="panel-body">  
+        <table  class="table table-hover table-sm" datatable [dtOptions]="dtOptions"  
+        [dtTrigger]="dtTrigger"  >  
+            <thead class="thead-light">  
+                <tr>  
+                    <th>User Id</th>  
+                    <th>User Name</th>  
+                    <th>Email Id</th>
+                    <th>Phone No</th>  
+                    <th>Action</th>
+                </tr>
+            </thead>  
+            <tbody>  
+                 <tr *ngFor="let user of users ">  
+                    <td>{{user.userId}}</td>  
+                    <td>{{user.userName}}</td>  
+                    <td>{{user.userEmail}}</td>
+                    <td>{{user.userPhone}}</td>  
+                    <td><button (click)="deleteUser(user.userId)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>
+                     </td>
+                  </tr>   
+            </tbody><br>  
+        </table>  
+    </div>
+</div>   

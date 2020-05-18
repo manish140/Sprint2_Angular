@@ -1,0 +1,16 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-sm bg-light navbar-dark">
+  <h1 align="center">Admin login</h1></nav>
+    <div>
+      UserName : <input type="text" name="username" [(ngModel)]="username"></div>
+      <div>
+      Password  : <input type="password" name="password " [(ngModel)]="password">
+    </div>
+    <button (click)=checkLogin() class="btn btn-success">
+      Login
+    </button>
+  </div>
